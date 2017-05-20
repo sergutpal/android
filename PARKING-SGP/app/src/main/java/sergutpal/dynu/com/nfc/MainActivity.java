@@ -52,33 +52,49 @@ public class MainActivity extends ActionBarActivity {
         closeApp();
     }
 
+    public void btnAlarmOnClick(View view) {
+        String msgTelegram;
+
+        msgTelegram = "sgp.alarma";
+        sendMessageTelegram(msgTelegram, "Alarma activada");
+    }
+
+    public void btnAlarmOffClick(View view) {
+        String msgTelegram;
+
+        msgTelegram = "sgp.alarmaoff";
+        sendMessageTelegram(msgTelegram, "Alarma desactivada");
+    }
+
     public void closeApp() {
         finish();
         System.exit(0);
     }
 
-
-    private void sendParkingMessage() {
-        String s;
-
+    private void sendMessageTelegram(String msgTelegram, String labelMsg) {
         try {
-            s = "sgp.parking";
             final String androidId = Secure.getString(getContentResolver(), Secure.ANDROID_ID).toLowerCase();
             Calendar c = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy_HHmmss");
             String dt = sdf.format(c.getTime());
 
-            s = s + '.' + androidId + '.' + dt;
+            msgTelegram = msgTelegram + '.' + androidId + '.' + dt;
 
-            TelegramSGP.sendTelegram(s);
+            TelegramSGP.sendTelegram(msgTelegram);
             playOkMp3();
             // Toast.makeText(this, "Abriendo parking", Toast.LENGTH_SHORT).show();
-            txtMessage.setText("Abriendo parking...");
-            closeApp();
+            txtMessage.setText(labelMsg);
         } catch (Exception e) {
             txtMessage.setText(e.getMessage());
-            Log.e("formatTag", e.getMessage());
         }
+    }
+
+    private void sendParkingMessage() {
+        String msgTelegram;
+
+        msgTelegram = "sgp.parking";
+        sendMessageTelegram(msgTelegram, "Abriendo parking...");
+        closeApp();
     }
 
     private void playOkMp3() {
