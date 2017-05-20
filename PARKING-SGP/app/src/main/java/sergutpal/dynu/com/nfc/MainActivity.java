@@ -81,7 +81,6 @@ public class MainActivity extends ActionBarActivity {
             msgTelegram = msgTelegram + '.' + androidId + '.' + dt;
 
             TelegramSGP.sendTelegram(msgTelegram);
-            playOkMp3();
             // Toast.makeText(this, "Abriendo parking", Toast.LENGTH_SHORT).show();
             txtMessage.setText(labelMsg);
         } catch (Exception e) {
@@ -92,9 +91,14 @@ public class MainActivity extends ActionBarActivity {
     private void sendParkingMessage() {
         String msgTelegram;
 
-        msgTelegram = "sgp.parking";
-        sendMessageTelegram(msgTelegram, "Abriendo parking...");
-        closeApp();
+        try {
+            msgTelegram = "sgp.parking";
+            sendMessageTelegram(msgTelegram, "Abriendo parking...");
+            playOkMp3();
+            closeApp();
+        } catch (Exception e) {
+            txtMessage.setText(e.getMessage());
+        }
     }
 
     private void playOkMp3() {
