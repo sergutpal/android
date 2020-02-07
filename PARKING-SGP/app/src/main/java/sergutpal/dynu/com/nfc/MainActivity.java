@@ -66,6 +66,13 @@ public class MainActivity extends ActionBarActivity {
         sendMessageTelegram(msgTelegram, "Alarma desactivada");
     }
 
+    public void btnMusicClick(View view) {
+        String msgTelegram;
+
+        msgTelegram = "sgp.musica";
+        sendMessageTelegram(msgTelegram, "Musica activada");
+    }
+
     public void closeApp() {
         finish();
         System.exit(0);
