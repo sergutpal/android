@@ -25,6 +25,7 @@ import android.provider.Settings.Secure;
 
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 import java.util.Calendar;
@@ -243,24 +244,20 @@ public class MainActivity extends ActionBarActivity {
 
 
     private NdefRecord createTextRecord(String content) {
-        try {
-            byte[] language;
-            language = Locale.getDefault().getLanguage().getBytes("UTF-8");
+        byte[] language;
+        language = Locale.getDefault().getLanguage().getBytes(StandardCharsets.UTF_8);
 
-            final byte[] text = content.getBytes("UTF-8");
-            final int languageSize = language.length;
-            final int textLength = text.length;
-            final ByteArrayOutputStream payload = new ByteArrayOutputStream(1 + languageSize + textLength);
+        final byte[] text = content.getBytes(StandardCharsets.UTF_8);
+        final int languageSize = language.length;
+        final int textLength = text.length;
+        final ByteArrayOutputStream payload = new ByteArrayOutputStream(1 + languageSize + textLength);
 
-            payload.write((byte) (languageSize & 0x1F));
-            payload.write(language, 0, languageSize);
-            payload.write(text, 0, textLength);
+        payload.write((byte) (languageSize & 0x1F));
+        payload.write(language, 0, languageSize);
+        payload.write(text, 0, textLength);
 
-            return new NdefRecord(NdefRecord.TNF_WELL_KNOWN, NdefRecord.RTD_TEXT, new byte[0], payload.toByteArray());
+        return new NdefRecord(NdefRecord.TNF_WELL_KNOWN, NdefRecord.RTD_TEXT, new byte[0], payload.toByteArray());
 
-        } catch (UnsupportedEncodingException e) {
-            Log.e("createTextRecord", e.getMessage());
-        }
         return null;
     }
 
