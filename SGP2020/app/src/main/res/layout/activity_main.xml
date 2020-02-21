@@ -19,17 +19,17 @@
         android:shadowRadius="5"
         android:text="Pulsador Parking"
         android:textColor="#FFFFFF"
-        android:textSize="35sp"
+        android:textSize="42sp"
         android:visibility="visible" />
 
     <TextView
         android:id="@+id/txtMessage"
         android:layout_width="fill_parent"
-        android:layout_height="210dp"
+        android:layout_height="135dp"
         android:gravity="center"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:visibility="visible" />
 
     <Button
@@ -41,6 +41,6 @@
         android:enabled="true"
         android:onClick="btnCloseOnClick"
         android:text="Cerrar"
-        android:textSize="20sp"
+        android:textSize="42sp"
         android:visibility="visible" />
 </LinearLayout>

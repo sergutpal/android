@@ -29,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
             TelegramSGP.sendTelegram(msgTelegram);
             telegram = new TelegramSGP();
             telegram.execute(msgTelegram);
-            txtMessage.setText("Mensaje: #" + msgTelegram + "# enviado");
+            while (!TelegramSGP.isMsgSent())
+                txtMessage.setText("Mensaje: #" + msgTelegram + "# enviado");
+            closeApp();
         } catch (Exception e) {
             txtMessage.setText("Error: " + e.toString());
             Log.e("sgp", "Error enviando mensaje a Telegram");
